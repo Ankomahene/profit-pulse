@@ -102,28 +102,60 @@ export function getDateRangeLastYear(): DateRange {
 export const getDateRangeByPreset = (preset: Preset) => {
   switch (preset) {
     case 'today':
-      return getDateRangeToday();
+      return { ...getDateRangeToday(), preset };
     case 'yesterday':
-      return getDateRangeYesterday();
+      return { ...getDateRangeYesterday(), preset };
     case 'thisWeek':
-      return getDateRangeThisWeek();
+      return { ...getDateRangeThisWeek(), preset };
     case 'past7Days':
-      return getDateRangePast7Days();
+      return { ...getDateRangePast7Days(), preset };
     case 'past15Days':
-      return getDateRangePast15Days();
+      return { ...getDateRangePast15Days(), preset };
     case 'past30Days':
-      return getDateRangePast30Days();
+      return { ...getDateRangePast30Days(), preset };
     case 'past60Days':
-      return getDateRangePast60Days();
+      return { ...getDateRangePast60Days(), preset };
     case 'past90Days':
-      return getDateRangePast90Days();
+      return { ...getDateRangePast90Days(), preset };
     case 'past1Year':
-      return getDateRangePast1Year();
+      return { ...getDateRangePast1Year(), preset };
     case 'thisYear':
-      return getDateRangeThisYear();
+      return { ...getDateRangeThisYear(), preset };
     case 'lastYear':
-      return getDateRangeLastYear();
+      return { ...getDateRangeLastYear(), preset };
     default:
-      return getDateRangeToday();
+      return { ...getDateRangeToday(), preset: 'customRange' };
   }
+};
+
+export const getPresetByDateRange = (
+  startDate: Date,
+  endDate: Date
+): Preset | null => {
+  const presets: Preset[] = [
+    'today',
+    'yesterday',
+    'thisWeek',
+    'past7Days',
+    'past15Days',
+    'past30Days',
+    'past60Days',
+    'past90Days',
+    'past1Year',
+    'thisYear',
+    'lastYear',
+  ];
+
+  for (const preset of presets) {
+    const { startDate: presetStartDate, endDate: presetEndDate } =
+      getDateRangeByPreset(preset);
+    if (
+      startDate.getTime() === new Date(presetStartDate).getTime() &&
+      endDate.getTime() === new Date(presetEndDate).getTime()
+    ) {
+      return preset;
+    }
+  }
+
+  return null;
 };

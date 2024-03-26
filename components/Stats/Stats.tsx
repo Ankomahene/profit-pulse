@@ -1,5 +1,5 @@
 'use client';
-import { useSalesAndExpenses } from '@/hooks';
+import { useSalesAndExpenses } from '@/hooks/use-sales-expenses';
 import { Text } from '@mantine/core';
 import classes from './Stats.module.css';
 import { formattedAmount } from '@/functions/calc';

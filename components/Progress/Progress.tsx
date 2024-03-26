@@ -1,5 +1,5 @@
 'use client';
-import { useAppContext } from '@/app/ContextProvider';
+import { useTransactions } from '@/context/TransactionsContextProvider';
 import { calculateMonthlyTotals, formattedAmount } from '@/functions/calc';
 import { BarChart as Chart } from '@mantine/charts';
 import { Progress } from '@mantine/core';
@@ -28,11 +28,11 @@ export const ProgressBar = () => {
 };
 
 export const BarChart = () => {
-  const context = useAppContext();
+  const context = useTransactions();
 
   const data = calculateMonthlyTotals(
-    context?.state.sales || [],
-    context?.state.expenses || []
+    context?.filteredSales || [],
+    context?.filteredExpenses || []
   );
 
   return (

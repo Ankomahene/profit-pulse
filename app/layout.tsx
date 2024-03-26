@@ -5,7 +5,7 @@ import '@mantine/dates/styles.css';
 import '@mantine/charts/styles.css';
 import './globals.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { ContextProvider } from './ContextProvider';
+import { TransactionsContextProvider } from '@/context/TransactionsContextProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,9 +27,9 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        <ContextProvider>
+        <TransactionsContextProvider>
           <MantineProvider>{children}</MantineProvider>
-        </ContextProvider>
+        </TransactionsContextProvider>
       </body>
     </html>
   );

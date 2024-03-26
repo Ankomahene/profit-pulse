@@ -1,77 +1,48 @@
-import React, { useEffect } from 'react';
-import { Select } from '@mantine/core';
-import { useAppContext } from '@/app/ContextProvider';
+import { presets } from '@/const';
+import {
+  getDateRangeByPreset,
+  getPresetByDateRange,
+} from '@/functions/get-dates-range';
+import { useUrlSearchParams } from '@/hooks/use-update-url-search-params';
 import { Preset } from '@/types';
-
-const presets: { label: string; value: Preset }[] = [
-  {
-    label: 'Today',
-    value: 'today',
-  },
-  {
-    label: 'Yesterday',
-    value: 'yesterday',
-  },
-  {
-    label: 'This Week',
-    value: 'thisWeek',
-  },
-  {
-    label: 'Last 7 days',
-    value: 'past7Days',
-  },
-  {
-    label: 'Last 15 Days',
-    value: 'past15Days',
-  },
-  {
-    label: 'Last 30 days',
-    value: 'past30Days',
-  },
-  {
-    label: 'Last 60 days',
-    value: 'past60Days',
-  },
-  {
-    label: 'Last 90 days',
-    value: 'past90Days',
-  },
-  {
-    label: 'This Year',
-    value: 'thisYear',
-  },
-  {
-    label: 'Last Year',
-    value: 'lastYear',
-  },
-  {
-    label: 'Past 1 Year',
-    value: 'past1Year',
-  },
-
-  {
-    label: 'All Time',
-    value: 'allTime',
-  },
-];
+import { Select } from '@mantine/core';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export const PresetsSelect = () => {
-  const context = useAppContext();
+  const [preset, setPreset] = useState('');
+  const updateSearchParams = useUrlSearchParams();
+  const searchParams = useSearchParams();
+  const defaultStartDate = searchParams.get('startDate');
+  const defaultEndDate = searchParams.get('endDate');
 
   const handleSetPreset = (preset: Preset) => {
-    context?.setPreset(preset);
+    setPreset(preset);
+    const { startDate, endDate } = getDateRangeByPreset(preset);
+
+    updateSearchParams({
+      startDate: new Date(startDate).toISOString(),
+      endDate: new Date(endDate).toISOString(),
+    });
   };
 
   useEffect(() => {
-    // console.log(context?.state);
-  }, [context?.state]);
+    if (defaultStartDate && defaultEndDate && !preset) {
+      const loadedPreset = getPresetByDateRange(
+        new Date(defaultStartDate),
+        new Date(defaultEndDate)
+      );
+      console.log('here');
+      setPreset(loadedPreset || '');
+    }
+  }, [defaultEndDate, defaultStartDate, preset]);
 
   return (
     <Select
       size="xs"
       placeholder="Presets"
       maw={150}
-      value={context?.state.preset || ''}
+      value={preset}
       onChange={(value) => handleSetPreset(value as Preset)}
       data={presets}
       searchable

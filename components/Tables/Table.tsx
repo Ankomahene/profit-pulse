@@ -19,27 +19,33 @@ export function TableLayout({ data }: Props) {
     );
   }
 
-  const rows = data.map((row) => {
+  const rows = data.map((row, i) => {
     return (
       <Table.Tr key={row.id}>
+        <Table.Td>{i + 1}</Table.Td>
         <Table.Td>{new Date(row.created_at).toLocaleDateString()}</Table.Td>
         <Table.Td>
-          <Anchor component="button" fz="sm" title={row.description}>
+          <Anchor ta="left" component="button" fz="sm" title={row.description}>
             {row.item}
           </Anchor>
         </Table.Td>
         <Table.Td>{row.amount.toFixed(2)}</Table.Td>
-        <Table.Td>{row.createdBy.name}</Table.Td>
+        <Table.Td>
+          <Text lineClamp={1} size="sm" title={row.createdBy.name}>
+            {row.createdBy.name}
+          </Text>
+        </Table.Td>
       </Table.Tr>
     );
   });
 
   return (
-    <ScrollArea h={500}>
-      <Table.ScrollContainer minWidth={400}>
+    <ScrollArea mah={500}>
+      <Table.ScrollContainer minWidth={400} mih={200}>
         <Table verticalSpacing="xs">
           <Table.Thead>
             <Table.Tr>
+              <Table.Th>#</Table.Th>
               <Table.Th>Date</Table.Th>
               <Table.Th>Item</Table.Th>
               <Table.Th>Amount</Table.Th>

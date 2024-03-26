@@ -1,7 +1,5 @@
 'use client';
-import { useAppContext } from '@/app/ContextProvider';
-import { calculateTotalAmount } from '@/functions/calc';
-import { useSalesAndExpenses } from '@/hooks';
+import { useSalesAndExpenses } from '@/hooks/use-sales-expenses';
 import { PieChart as Chart } from '@mantine/charts';
 import { Center } from '@mantine/core';
 
