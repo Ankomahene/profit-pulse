@@ -2,9 +2,9 @@ import { useTransactions } from '@/context/TransactionsContextProvider';
 import { useUrlSearchParams } from '@/hooks/use-update-url-search-params';
 import { Select } from '@mantine/core';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-export const CollectionSelect = () => {
+export const TransactionLabelSelect = () => {
   const context = useTransactions();
   const updateParams = useUrlSearchParams();
   const searchParams = useSearchParams();

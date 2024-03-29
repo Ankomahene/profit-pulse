@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { TableLayout } from './Table';
-import { Card, Divider, Group, Input, Text, Title } from '@mantine/core';
-import { useTransactions } from '@/context/TransactionsContextProvider';
-import { IconSearch } from '@tabler/icons-react';
-import { IExpense, ISale } from '@/types';
 import { calculateTotalAmount } from '@/functions/calc';
+import { IExpense, ISale } from '@/types';
+import { Card, Divider, Group, Input, Text, Title } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
+import { TableLayout } from './Table';
 
 interface Props {
   label: string;

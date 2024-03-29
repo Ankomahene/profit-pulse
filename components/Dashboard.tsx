@@ -1,6 +1,6 @@
 'use client';
 import { Card, Group, Stack } from '@mantine/core';
-import { CollectionSelect } from './CollectionSelect';
+import { TransactionLabelSelect } from './TransactionLabelSelect';
 import DateRange from './DateRange';
 import { PieChart } from './PieChart';
 import { PresetsSelect } from './PresetsSelect';
@@ -18,7 +18,7 @@ export const Dashboard = () => {
           <PresetsSelect />
           <DateRange />
         </Group>
-        <CollectionSelect />
+        <TransactionLabelSelect />
       </Group>
 
       <Stack my="lg" hiddenFrom="md">
@@ -27,7 +27,7 @@ export const Dashboard = () => {
         </Card>
         <Group align="flex-end" justify="space-between">
           <PresetsSelect />
-          <CollectionSelect />
+          <TransactionLabelSelect />
         </Group>
       </Stack>
 

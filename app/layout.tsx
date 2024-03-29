@@ -3,9 +3,11 @@ import { Inter } from 'next/font/google';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/charts/styles.css';
+import '@mantine/notifications/styles.css';
 import './globals.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { TransactionsContextProvider } from '@/context/TransactionsContextProvider';
+import { Notifications } from '@mantine/notifications';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +30,10 @@ export default function RootLayout({
 
       <body className={inter.className}>
         <TransactionsContextProvider>
-          <MantineProvider>{children}</MantineProvider>
+          <MantineProvider>
+            <Notifications position="top-center" />
+            {children}
+          </MantineProvider>
         </TransactionsContextProvider>
       </body>
     </html>
