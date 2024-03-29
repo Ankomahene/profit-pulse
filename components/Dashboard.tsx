@@ -9,10 +9,11 @@ import { Stats } from './Stats/Stats';
 import { ExpensesTable } from './Tables/Expenses';
 import { SalesTable } from './Tables/Sales';
 import { ResultsNotice } from './ResultsNotice';
+import { Suspense } from 'react';
 
 export const Dashboard = () => {
   return (
-    <>
+    <Suspense fallback={undefined}>
       <Group justify="space-between" align="flex-end" my="lg" visibleFrom="md">
         <Group align="flex-end">
           <PresetsSelect />
@@ -56,6 +57,6 @@ export const Dashboard = () => {
           <PieChart />
         </Stack>
       </Card>
-    </>
+    </Suspense>
   );
 };
